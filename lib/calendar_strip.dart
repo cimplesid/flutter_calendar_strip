@@ -20,6 +20,7 @@ class CalendarStrip extends StatefulWidget {
   final bool weekStartsOnSunday;
   final Icon rightIcon;
   final Icon leftIcon;
+  final Function(DateTime, DateTime) onWeekChanged;
 
   CalendarStrip({
     this.addSwipeGesture = false,
@@ -36,6 +37,7 @@ class CalendarStrip extends StatefulWidget {
     this.markedDates,
     this.rightIcon,
     this.leftIcon,
+    this.onWeekChanged,
   });
 
   State<CalendarStrip> createState() =>
@@ -263,9 +265,9 @@ class CalendarStripState extends State<CalendarStrip>
     return normalValue;
   }
 
-  monthLabelWidget(monthLabel) {
+  monthLabelWidget(monthLabel, {onNext, onPrev}) {
     if (widget.monthNameWidget != null) {
-      return widget.monthNameWidget(monthLabel);
+      return widget.monthNameWidget(monthLabel, onNext, onPrev);
     }
     return Container(
         child: Text(monthLabel, style: monthLabelStyle),
@@ -342,7 +344,7 @@ class CalendarStripState extends State<CalendarStrip>
     }
     monthLabel = getMonthLabel();
     return Column(children: [
-      monthLabelWidget(monthLabel),
+      monthLabelWidget(monthLabel, onNext: onNextRow, onPrev: onPrevRow),
       Container(
           padding: EdgeInsets.all(0),
           child: GestureDetector(
