@@ -231,6 +231,8 @@ class CalendarStripState extends State<CalendarStrip>
       rowStartingDate = rowStartingDate.subtract(Duration(days: 7));
       isOnEndingWeek = dateRange['isEndingWeekOnRange'];
       isOnStartingWeek = dateRange['isStartingWeekOnRange'];
+      widget.onWeekChanged(
+          rowStartingDate, rowStartingDate.add(Duration(days: 7)));
     });
   }
 
@@ -240,6 +242,8 @@ class CalendarStripState extends State<CalendarStrip>
       rowStartingDate = rowStartingDate.add(Duration(days: 7));
       isOnEndingWeek = dateRange['isEndingWeekOnRange'];
       isOnStartingWeek = dateRange['isStartingWeekOnRange'];
+      widget.onWeekChanged(
+          rowStartingDate, rowStartingDate.add(Duration(days: 7)));
     });
   }
 
